@@ -1,0 +1,43 @@
+Name: Alex J. Turing
+Role: Final Year Computer Science Student
+Roll Number: CS-22-101
+Email: alex.turing@example.com
+Location: Visakhapatnam, India
+
+Objective:
+Aspiring Software Engineer with a strong foundation in Advanced Web Technologies and Artificial Intelligence. seeking an entry-level position to apply skills in full-stack development and generative AI.
+
+Education:
+Bachelor of Technology (B.Tech) in Computer Science and Engineering.
+Current CGPA: 8.7/10.0 (Expected Graduation: 2026).
+Key Coursework: Advanced Web Technologies, Data Structures & Algorithms, Database Management Systems, Operating Systems.
+
+Technical Skills:
+Languages: Python, JavaScript (ES6+), SQL, HTML5, CSS3.
+Frameworks & Libraries: Flask, Node.js, React.js, Tailwind CSS.
+AI & ML: RAG (Retrieval-Augmented Generation), LangChain, HuggingFace Transformers, Google Gemini API.
+Tools: Git/GitHub, VS Code, Figma, Postman.
+
+Project 1: Fine-Print Slayer (Browser Extension)
+- Developed a browser extension that detects and highlights predatory clauses in Terms & Conditions pages.
+- Integrated an AI backend using Python and NLP to summarize legal text into simple English.
+- This project won 1st Place at the 2024 University Hackathon.
+
+Project 2: AI-Powered Resume Chatbot (This Project)
+- Built a RAG-based chatbot capable of answering recruiter questions based on personal resume data.
+- Tech Stack: Python, Flask, FAISS Vector Database, Google Gemini 1.5 Flash model.
+- Designed a custom 'Nano Banana' aesthetic UI using high-contrast CSS.
+
+Project 3: Finance Social Gap Solver
+- Prototype for a fintech solution addressing gaps in retail banking for underserved communities.
+- Designed the frontend interface focusing on accessibility and ease of use.
+
+Certifications & Achievements:
+- Completed a '100-Day AI Learning Challenge', documenting progress in LLMs and prompt engineering.
+- Certified in Advanced Web Technologies (College Elective).
+- Finalist in the National Smart India Hackathon (Internal Round).
+
+Soft Skills & Interests:
+- Strong communication skills tailored for technical documentation.
+- Passionate about UI/UX design, specifically creating carousel-style social media posts with unique aesthetics.
+- Active participant in coding communities and open-source discussions.

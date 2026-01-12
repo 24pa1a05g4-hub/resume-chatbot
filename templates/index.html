@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alex Turing | AI Assistant</title>
+    <style>
+        /* --- NANO BANANA THEME --- */
+        :root {
+            --banana-yellow: #FFE135;
+            --banana-dark: #1A1A1A;
+            --banana-grey: #2D2D2D;
+            --text-white: #FFFFFF;
+        }
+
+        body {
+            font-family: 'Courier New', Courier, monospace; /* Tech/Code vibe */
+            background-color: var(--banana-dark);
+            color: var(--text-white);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        /* Main Card */
+        .chat-container {
+            width: 400px;
+            background: var(--banana-grey);
+            border: 2px solid var(--banana-yellow);
+            border-radius: 15px;
+            box-shadow: 0 0 20px rgba(255, 225, 53, 0.2);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Header */
+        .header {
+            background: var(--banana-yellow);
+            padding: 15px;
+            text-align: center;
+            color: var(--banana-dark);
+            font-weight: bold;
+            font-size: 1.2rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Chat Area */
+        .messages {
+            height: 350px;
+            overflow-y: auto;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        /* Message Bubbles */
+        .msg {
+            padding: 10px 15px;
+            border-radius: 10px;
+            max-width: 80%;
+            font-size: 0.9rem;
+            line-height: 1.4;
+        }
+
+        /* User Bubble (Right) */
+        .user {
+            background: var(--banana-yellow);
+            color: var(--banana-dark);
+            align-self: flex-end;
+            border-bottom-right-radius: 0;
+            font-weight: bold;
+        }
+
+        /* Bot Bubble (Left) */
+        .bot {
+            background: #404040;
+            color: var(--text-white);
+            align-self: flex-start;
+            border-bottom-left-radius: 0;
+            border: 1px solid #555;
+        }
+
+        /* Input Area */
+        .input-area {
+            display: flex;
+            padding: 10px;
+            background: #222;
+            border-top: 1px solid #444;
+        }
+
+        input {
+            flex: 1;
+            padding: 12px;
+            border-radius: 5px;
+            border: 1px solid #555;
+            background: #333;
+            color: white;
+            outline: none;
+        }
+
+        input:focus {
+            border-color: var(--banana-yellow);
+        }
+
+        button {
+            margin-left: 10px;
+            padding: 10px 20px;
+            background: var(--banana-yellow);
+            color: var(--banana-dark);
+            border: none;
+            border-radius: 5px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        button:hover {
+            background: #FFD700;
+            transform: scale(1.05);
+        }
+        
+        /* Scrollbar Styling */
+        .messages::-webkit-scrollbar { width: 8px; }
+        .messages::-webkit-scrollbar-thumb { background: #555; border-radius: 4px; }
+    </style>
+</head>
+<body>
+
+    <div class="chat-container">
+        <div class="header">
+            ⚡ Alex's Resume Bot ⚡
+        </div>
+        
+        <div class="messages" id="chat-box">
+            <div class="msg bot">Hi! I'm Alex's AI. Ask me about his projects, skills, or experience! 🍌</div>
+        </div>
+        
+        <div class="input-area">
+            <input type="text" id="user-input" placeholder="Type here..." onkeypress="handleEnter(event)">
+            <button onclick="sendMessage()">SEND</button>
+        </div>
+    </div>
+
+    <script>
+        // Allow sending with "Enter" key
+        function handleEnter(e) {
+            if (e.key === "Enter") sendMessage();
+        }
+
+        async function sendMessage() {
+            let input = document.getElementById("user-input");
+            let chatBox = document.getElementById("chat-box");
+            let msg = input.value;
+            
+            if(!msg) return;
+
+            // 1. Add User Message
+            chatBox.innerHTML += `<div class='msg user'>${msg}</div>`;
+            input.value = "";
+            chatBox.scrollTop = chatBox.scrollHeight; // Auto-scroll down
+
+            // 2. Show "Thinking..." (Optional Polish)
+            let loadingId = "loading-" + Date.now();
+            chatBox.innerHTML += `<div class='msg bot' id='${loadingId}'>...</div>`;
+            chatBox.scrollTop = chatBox.scrollHeight;
+
+            // 3. Send to Backend
+            try {
+                let response = await fetch("/ask", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ message: msg })
+                });
+                
+                let data = await response.json();
+                
+                // 4. Replace "Thinking..." with Real Answer
+                document.getElementById(loadingId).remove();
+                chatBox.innerHTML += `<div class='msg bot'>${data.answer}</div>`;
+                
+            } catch (error) {
+                document.getElementById(loadingId).innerHTML = "Error connecting to server.";
+            }
+
+            chatBox.scrollTop = chatBox.scrollHeight;
+        }
+    </script>
+</body>
+</html>
